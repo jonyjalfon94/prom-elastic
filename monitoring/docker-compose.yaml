@@ -85,11 +85,11 @@ services:
   kafkaexporter:
     image: danielqsj/kafka-exporter:latest
     container_name: kafkaexporter
+    hostname: "localhost"
     command:
-      - '--kafka.server=kafka01:9093'
+      - '--kafka.server=192.168.0.172:9093'
       - '--tls.cert-file=/certs/kafka-exporter-signed.pem'
       - '--tls.key-file=/certs/kafka-exporter.key'
-
     ports:
       - 9308:9308
     expose:
