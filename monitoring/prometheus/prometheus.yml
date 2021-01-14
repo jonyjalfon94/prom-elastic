@@ -5,6 +5,9 @@ global:
   evaluation_interval: 15s
 
 # A list of scrape configurations.
+
+# ---------------------------------- Node Exporter -----------------------------------
+
 scrape_configs:
   - job_name: "self-node-exporter"
     static_configs:
@@ -12,12 +15,38 @@ scrape_configs:
 
   - job_name: "eslastic-node-exporter"
     static_configs:
-      - targets: ["10.90.25.239:9100", "10.90.25.240:9100", "10.90.25.242:9100"]
+      - targets: [ "es01:9100", "es02:9100", "es03:9100", "es04:9100", "es05:9100", "es06:9100", "es07:9100", "es08:9100", "es09:9100", "es01-m:9100", "es02-m:9100", "es03-m:9100" ]
 
+  - job_name: "kafka-node-exporter"
+    static_configs:
+      - targets: ["kafka01:9100", "kafka02:9100", "kafka03:9100"]
+
+  - job_name: "logstash-node-exporter"
+    static_configs:
+      - targets: ["logstash01:9100", "logstash02:9100", "logstash03:9100"]
+
+  - job_name: "grafana-node-exporter"
+    static_configs:
+      - targets: ["grafana:9100"]
+
+  - job_name: "kibana-node-exporter"
+    static_configs:
+      - targets: ["kibana:9100"]      
+
+  - job_name: "logger-node-exporter"
+    static_configs:
+      - targets: ["logger:9100"]
+
+  - job_name: "gitlab-node-exporter"
+    static_configs:
+      - targets: ["gitlab:9100"]
+
+# ---------------------------------- Elasticsearch Exporter -----------------------------------
   - job_name: "elasticsearch-exporter"
     static_configs:
       - targets: ["esexporter:9114"]
 
+# ---------------------------------- Kafka Exporter -----------------------------------
   - job_name: "kafka_exporter"
     static_configs:
       - targets: ["kafkaexporter:9308"]

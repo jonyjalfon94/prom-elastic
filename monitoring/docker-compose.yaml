@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.8"
 services:
 #---------------------------------- Prometheus ----------------------------------
   prometheus:
@@ -7,7 +7,7 @@ services:
     # replace with ip or dns of the server
     hostname: "localhost"
     restart: unless-stopped
-#    mem_limit: 4G
+    mem_limit: 4G
     ports:
       - "9091:9090"
     expose:
@@ -24,7 +24,7 @@ services:
     image: "grafana/grafana:7.3.5"
     container_name: grafana
     restart: unless-stopped
-#    mem_limit: 4G
+    mem_limit: 4G
     ports:
       - "8081:3000"
     expose:
