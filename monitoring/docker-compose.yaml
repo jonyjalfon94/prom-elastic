@@ -9,9 +9,9 @@ services:
     restart: unless-stopped
     mem_limit: 4G
     ports:
-      - "9091:9090"
+      - "9090:9090"
     expose:
-      - "9091"
+      - "9090"
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
     volumes:
@@ -26,9 +26,9 @@ services:
     restart: unless-stopped
     mem_limit: 4G
     ports:
-      - "8081:3000"
+      - "8080:3000"
     expose:
-      - "8081"
+      - "8080"
     volumes:
       - "grafana_data:/var/lib/grafana"
     environment:
@@ -86,11 +86,16 @@ services:
     image: danielqsj/kafka-exporter:latest
     container_name: kafkaexporter
     command:
-      - '--kafka.server=10.90.26.8:9092'
+      - '--kafka.server=kafka01:9093'
+      - '--tls.cert-file=/certs/kafka-exporter-signed.pem'
+      - '--tls.key-file=/certs/kafka-exporter.key'
+
     ports:
       - 9308:9308
     expose:
       - 9308
+    volumes:
+      - ../test:/certs
     networks:
       monitoring:
 
