@@ -1,0 +1,90 @@
+version: "3.8"
+services:
+#---------------------------------- Prometheus ----------------------------------
+  prometheus:
+    image: "prom/prometheus:v2.23.0"
+    container_name: prometheus
+    # replace with ip or dns of the server
+    hostname: "localhost"
+    restart: unless-stopped
+    mem_limit: 4G
+    ports:
+      - "9091:9090"
+    expose:
+      - "9091"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    volumes:
+      - "./prometheus/:/etc/prometheus/"
+      - "prometheus_data:/prometheus"
+    networks:
+      monitoring:
+# ---------------------------------- Grafana ----------------------------------
+  grafana:
+    image: "grafana/grafana:7.3.5"
+    container_name: grafana
+    restart: unless-stopped
+    mem_limit: 4G
+    ports:
+      - "8081:3000"
+    expose:
+      - "8081"
+    volumes:
+      - "grafana_data:/var/lib/grafana"
+    environment:
+      # INSTALL SOME GRAFANA PLUGINS AUTOMATICALLY
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel,novalabs-annotations-panel,vonage-status-panel,fetzerch-sunandmoon-datasource,natel-discrete-panel,natel-influx-admin-panel
+      # YOU CAN CHANGE THE ADMIN PASSWORD USING THIS VARIABLE
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      monitoring:
+# ---------------------------------- Elasticsearch Exporter ----------------------------------
+  esexporter:
+    image: justwatch/elasticsearch_exporter:1.1.0
+    container_name: esexporter
+    # volumes:
+    #   - "./es-exporter/certs/:/certs"
+    command:
+      - "--es.uri=https://admin:admin@10.90.25.239:9200"
+    #  - "--es.ca=/certs/root-ca.pem"
+    #  - "--es.client-private-key=/certs/client-key.pem"
+    #  - "--es.client-cert=/certs/client.pem"
+      - "--es.all"
+      - "--es.indices"
+      - "--es.clusterinfo.interval=1m"
+      - "--es.ssl-skip-verify"
+    restart: unless-stopped
+    ports:
+      - 9114:9114
+    expose:
+      - 9114
+    networks:
+      monitoring:
+# ---------------------------------- Node Exporter ----------------------------------      
+  nodeexporter:
+    image: prom/node-exporter:v1.0.1
+    container_name: nodeexporter
+    user: root
+    privileged: true
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)"
+    restart: unless-stopped
+    ports:
+      - 9101:9100
+    expose:
+      - 9101
+    networks:
+      monitoring:
+# ---------------------------------- Volumes ----------------------------------
+volumes:
+  prometheus_data:
+  grafana_data:
+# ---------------------------------- Networks ----------------------------------
+networks:
+  monitoring:
