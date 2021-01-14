@@ -90,7 +90,7 @@ services:
       - '--kafka.server=192.168.0.172:9093'
       - '--tls.cert-file=/certs/kafka-exporter-signed.pem'
       - '--tls.key-file=/certs/kafka-exporter.key'
-      - '--tls.enabled'
+      - '--tls.enabled="true"'
     ports:
       - 9308:9308
     expose:
