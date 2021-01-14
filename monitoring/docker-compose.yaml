@@ -81,6 +81,19 @@ services:
       - 9101
     networks:
       monitoring:
+# ---------------------------------- Kafka Exporter ----------------------------------  
+  kafkaexporter:
+    image: danielqsj/kafka-exporter:latest
+    container_name: kafkaexporter
+    command:
+      - '--kafka.server=10.90.26.8:9092'
+    ports:
+      - 9308:9308
+    expose:
+      - 9308
+    networks:
+      monitoring:
+
 # ---------------------------------- Volumes ----------------------------------
 volumes:
   prometheus_data:
