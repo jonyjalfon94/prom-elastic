@@ -5,8 +5,8 @@ global:
   evaluation_interval: 15s
 
 rule_files:
-  - "elasticsearch-rules.yaml"
-  - "kafka-rules.yaml"
+  - "elasticsearch-rules.yml"
+  - "kafka-rules.yml"
 
 scrape_configs:
   # ---------------------------------- Node Exporter -----------------------------------
