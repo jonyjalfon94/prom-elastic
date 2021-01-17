@@ -2,7 +2,7 @@ groups:
   - name: elasticsearch
     rules:
       - alert: Elastic_UP
-        expr: elasticsearch_up{job="elasticsearch"} != 1
+        expr: elasticsearch_up{job="elasticsearch-exporter"} != 1
         for: 2m
         labels:
           severity: alert

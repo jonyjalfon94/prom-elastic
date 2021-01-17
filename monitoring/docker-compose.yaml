@@ -87,7 +87,7 @@ services:
     container_name: kafkaexporter
     hostname: "localhost"
     command:
-      - '--kafka.server=10.90.26.8:9093'
+      - '--kafka.server=10.90.26.8:9092'
       # - '--tls.cert-file=/certs/kafka-exporter-signed.pem'
       # - '--tls.key-file=/certs/kafka-exporter.key'
       - "--tls.insecure-skip-tls-verify"
