@@ -8,8 +8,7 @@ groups:
           severity: alert
           value: '{{$value}}'
         annotations:
-          description: This server's Elasticsearch instance status has a value of {{ $value
-            }}.
+          description: This server's Elasticsearch instance status has a value of {{ $value}}.
           summary: 'Instance {{ $labels.instance }}: Elasticsearch instance status is
         not 1'
       - alert: Elastic_Cluster_Health_RED
