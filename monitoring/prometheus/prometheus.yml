@@ -56,6 +56,7 @@ scrape_configs:
 
   # ---------------------------------- jmx Exporter -----------------------------------
 
-  - job_name: "jmx_exporter"
+  - job_name: "kafka"
     static_configs:
       - targets: ["10.90.26.8:7071"]  
+      
