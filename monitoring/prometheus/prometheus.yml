@@ -58,5 +58,5 @@ scrape_configs:
 
   - job_name: "kafka"
     static_configs:
-      - targets: ["10.90.26.8:7071"]  
+      - targets: ["10.90.26.8:7071", "10.90.26.9:7071", "10.90.26.10:7071"]  
       
