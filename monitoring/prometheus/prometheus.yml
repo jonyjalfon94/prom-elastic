@@ -60,6 +60,10 @@ scrape_configs:
     static_configs:
       - targets: ["kafkaexporter:9308"]
 
+  # ---------------------------------- Kafka Minion -----------------------------------
+  - job_name: "kafka_minion"
+    static_configs:
+      - targets: ["kafkaminion:8081"]
   # ---------------------------------- jmx Exporter -----------------------------------
 
   - job_name: "kafka"
