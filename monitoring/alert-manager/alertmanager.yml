@@ -1,17 +1,17 @@
 global:
   resolve_timeout: 1m
+  smtp_from: monitoring2204@gmail.com
+  smtp_smarthost: smtp.gmail.com:587
+  smtp_auth_username: monitoring2204@gmail.com
+  smtp_auth_identity: monitoring2204@gmail.com
+  smtp_auth_password: monitoring123
+  smtp_require_tls: true
   
 route:
   group_by: [Alertname]
-  receiver: 'gmail-notifications'
+  receiver: 'email'
 
 receivers:
-- name: 'gmail-notifications'
-  email_configs:
-  - to: monitoring2204@gmail.com
-    from: monitoring2204@gmail.com
-    smarthost: smtp.gmail.com:587
-    auth_username: monitoring2204@gmail.com
-    auth_identity: monitoring2204@gmail.com
-    auth_password: monitoring123
-    send_resolved: true
+  - name: 'email'
+    email_configs:
+    - to: 'monitoring2204@gmail.com'
