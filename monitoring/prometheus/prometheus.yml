@@ -26,30 +26,6 @@ scrape_configs:
         labels:
           group: "elasticsearch"
 
-      # - targets: ["kafka01:9100", "kafka02:9100", "kafka03:9100"]
-      #   labels:
-      #     group: "kafka"
-
-      # - targets: ["logstash01:9100", "logstash02:9100", "logstash03:9100"]
-      #   labels:
-      #     group: "logstash"
-
-      # - targets: ["grafana.tiptool.co:9100"]
-      #   labels:
-      #     group: "grafana"
-
-      # - targets: ["kibana:9100"]
-      #   labels:
-      #     group: "kibana"
-
-      # - targets: ["logger:9100"]
-      #   labels:
-      #     group: "logger"
-
-      # - targets: ["gitlab:9100"]
-      #   labels:
-      #     group: "gitlab"
-
   # ---------------------------------- Elasticsearch Exporter -----------------------------------
   - job_name: "elasticsearch-exporter"
     static_configs:
@@ -60,13 +36,9 @@ scrape_configs:
     static_configs:
       - targets: ["kafkaexporter:9308"]
 
-  # ---------------------------------- Kafka Minion -----------------------------------
-  - job_name: "kafka_minion"
-    static_configs:
-      - targets: ["10.90.25.205:8081"]
   # ---------------------------------- jmx Exporter -----------------------------------
 
-  - job_name: "kafka"
-    static_configs:
-      - targets: ["10.90.26.8:7071", "10.90.26.9:7071", "10.90.26.10:7071"]  
+  # - job_name: "kafka"
+  #   static_configs:
+  #     - targets: ["10.90.26.8:7071", "10.90.26.9:7071", "10.90.26.10:7071"]  
       
