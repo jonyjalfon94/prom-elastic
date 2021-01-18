@@ -1,24 +1,16 @@
 global:
-  resolve_timeout: 5m
+  resolve_timeout: 1m
 
 route:
-  group_by: ['alertname']
-  group_wait: 10s
-  group_interval: 10s
-  repeat_interval: 10s
-  receiver: 'email'
+  receiver: 'gmail-notifications'
+
 receivers:
-- name: 'email'
+- name: 'gmail-notifications'
   email_configs:
-  - to: 'jonyjalfon94@gmail.com'
-    from: 'mail_id@gmail.com'
+  - to: monitoring2204@gmail.com
+    from: monitoring2204@gmail.com
     smarthost: smtp.gmail.com:587
-    auth_username: 'jonyjalfon94@gmail.com'
-    auth_identity: 'jonyjalfon94@gmail.com'
-    auth_password: 'Password'
-inhibit_rules:
-  - source_match:
-      severity: 'critical'
-    target_match:
-      severity: 'warning'
-    equal: ['alertname', 'dev', 'instance']
+    auth_username: monitoring2204@gmail.com
+    auth_identity: monitoring2204@gmail.com
+    auth_password: rglqpioinpxcloyi
+    send_resolved: true
