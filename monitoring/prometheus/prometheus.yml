@@ -63,7 +63,7 @@ scrape_configs:
   # ---------------------------------- Kafka Minion -----------------------------------
   - job_name: "kafka_minion"
     static_configs:
-      - targets: ["localhost:8081"]
+      - targets: ["10.90.25.205:8081"]
   # ---------------------------------- jmx Exporter -----------------------------------
 
   - job_name: "kafka"
