@@ -2,7 +2,7 @@ global:
   resolve_timeout: 1m
   smtp_from: monitoring2204@gmail.com
   smtp_smarthost: smtp.gmail.com:587
-  smtp_auth_username: monitoring2204@gmail.com
+  smtp_auth_username: monitoring2204
   smtp_auth_identity: monitoring2204@gmail.com
   smtp_auth_password: monitoring123
   smtp_require_tls: true
