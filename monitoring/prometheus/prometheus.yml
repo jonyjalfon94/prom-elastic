@@ -8,6 +8,12 @@ rule_files:
   - "elasticsearch-rules.yml"
   - "kafka-rules.yml"
 
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - alertmanager:9093
+
 scrape_configs:
   # ---------------------------------- Node Exporter -----------------------------------
   - job_name: "node-exporter"

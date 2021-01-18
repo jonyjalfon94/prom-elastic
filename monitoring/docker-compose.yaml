@@ -100,6 +100,21 @@ services:
       - ../test:/certs
     networks:
       monitoring:
+# ---------------------------------- Alert Manager ----------------------------------      
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    volumes:
+      - ./alert-manager:/prometheus
+      - alertmanager_data:/data
+    command:
+      - '--config.file=/prometheus/alertmanager.yml'
+      - '--storage.path=/data'
+    ports:
+      - 9093:9093
+    networks:
+      monitoring:
+
 # ---------------------------------- Kafka Minion ----------------------------------
   kafkaminion:
     image: quay.io/google-cloud-tools/kafka-minion
