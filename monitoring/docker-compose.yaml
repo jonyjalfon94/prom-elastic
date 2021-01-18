@@ -118,7 +118,7 @@ services:
 # ---------------------------------- Kafka Minion ----------------------------------
   kafkaminion:
     image: quay.io/google-cloud-tools/kafka-minion
-    container_name: kafkaexporter
+    container_name: kafkaminion
     environment:
       KAFKA_BROKERS: "10.90.26.8:9092, 10.90.26.9:9092, 10.90.26.10:9092"
     ports:
