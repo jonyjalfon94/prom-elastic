@@ -2,6 +2,7 @@ global:
   resolve_timeout: 1m
   
 route:
+  group_by: [Alertname]
   receiver: 'gmail-notifications'
 
 receivers:
@@ -12,5 +13,5 @@ receivers:
     smarthost: smtp.gmail.com:587
     auth_username: monitoring2204@gmail.com
     auth_identity: monitoring2204@gmail.com
-    auth_password: rglqpioinpxcloyi
+    auth_password: monitoring123
     send_resolved: true
