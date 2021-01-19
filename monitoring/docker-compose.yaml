@@ -110,6 +110,7 @@ services:
     command:
       - '--config.file=/prometheus/alertmanager.yml'
       - '--storage.path=/data'
+      - '--log.level=debug'
     ports:
       - 9093:9093
     networks:
