@@ -19,25 +19,21 @@ services:
       - "prometheus_data:/prometheus"
     networks:
       monitoring:
-# ---------------------------------- Grafana ----------------------------------
-  grafana:
-    image: "grafana/grafana:7.3.5"
-    container_name: grafana
-    restart: unless-stopped
-    mem_limit: 4G
-    ports:
-      - "8080:3000"
-    expose:
-      - "8080"
-    volumes:
-      - "grafana_data:/var/lib/grafana"
-    environment:
-      # INSTALL SOME GRAFANA PLUGINS AUTOMATICALLY
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel,novalabs-annotations-panel,vonage-status-panel,fetzerch-sunandmoon-datasource,natel-discrete-panel,natel-influx-admin-panel
-      # YOU CAN CHANGE THE ADMIN PASSWORD USING THIS VARIABLE
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-    networks:
-      monitoring:
+# ---------------------------------- Alert Manager ----------------------------------      
+alertmanager:
+  image: prom/alertmanager
+  container_name: alertmanager
+  volumes:
+    - ./alert-manager:/prometheus
+    - alertmanager_data:/data
+  command:
+    - '--config.file=/prometheus/alertmanager.yml'
+    - '--storage.path=/data'
+    - '--log.level=debug'
+  ports:
+    - 9093:9093
+  networks:
+    monitoring:
 # ---------------------------------- Elasticsearch Exporter ----------------------------------
   esexporter:
     image: justwatch/elasticsearch_exporter:1.1.0
@@ -104,7 +100,7 @@ services:
 # ---------------------------------- Volumes ----------------------------------
 volumes:
   prometheus_data:
-  grafana_data:
+  alertmanager_data:
 # ---------------------------------- Networks ----------------------------------
 networks:
   monitoring:
